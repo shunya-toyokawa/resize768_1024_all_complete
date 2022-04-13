@@ -23,6 +23,8 @@ with open('detection_Result.csv', 'w') as f:
     #print("ID,種類,x座標,y座標,幅,高さ", file=f) # print()の第2引数で出力先を指定可能
  
     for i in range(len(objects)):
+        if objects.name[i] != "person":
+            continue
         name = objects.name[i]
         xmin = objects.xmin[i]
         ymin = objects.ymin[i]
@@ -31,6 +33,7 @@ with open('detection_Result.csv', 'w') as f:
         # print(f"{i}, 種類:{name}, 座標x:{xmin}, 座標y:{ymin}, 幅:{width}, 高さ:{height}")
         # csvファイルにバウンディングBOX情報を出力
         print(f"{i},{name},{xmin},{ymin},{width},{height}", file=f)
+        break
 
 results.show()  # 検出した物体の表示
 results.crop()  # 検出した物体の切り取り
